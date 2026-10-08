@@ -67,14 +67,17 @@ export default function Footer() {
 
         <div style={{
           display: 'flex',
-          justify: 'space-between',
+          justifyContent: 'space-between',
           alignItems: 'center',
           flexWrap: 'wrap',
           gap: '12px',
           fontSize: '13px'
         }}>
           <div>جميع الحقوق محفوظة © 2026 — منصة مَلعبك ⚽</div>
-          <div>صُنع بشغف للاعبي كرة القدم في مصر 🇪🇬</div>
+          <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+            <span>صُنع بشغف للاعبي كرة القدم في مصر 🇪🇬</span>
+            <span style={{ fontWeight: '800', color: 'var(--accent-lime)' }}>Powered By AT LOOPS</span>
+          </div>
         </div>
       </div>
     </footer>
