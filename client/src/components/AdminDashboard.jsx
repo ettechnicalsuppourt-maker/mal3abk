@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { mockBookings, mockPitches } from '../utils/mockData';
-import { Users, CalendarCheck, MapPin, LogOut, Search, Activity, Plus, Trash2, Edit, Download } from 'lucide-react';
+import { Users, CalendarCheck, MapPin, LogOut, Search, Activity, Plus, Trash2, Edit, Download, DollarSign } from 'lucide-react';
 import AdminQuickBooking from './AdminQuickBooking';
+import AdminFinancesTab from './AdminFinancesTab';
 import AdminAddPitchModal from './AdminAddPitchModal';
 import Toast from './Toast';
 
@@ -133,6 +134,24 @@ export default function AdminDashboard() {
               <MapPin size={18} />
               الملاعب
             </button>
+            <button 
+              onClick={() => setActiveTab('finances')}
+              style={{
+                background: activeTab === 'finances' ? 'rgba(255,255,255,0.1)' : 'transparent',
+                color: activeTab === 'finances' ? 'var(--accent-lime)' : '#c2dcd0',
+                border: 'none',
+                padding: '8px 16px',
+                borderRadius: '8px',
+                fontWeight: 700,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px'
+              }}
+            >
+              <DollarSign size={18} />
+              الماليات
+            </button>
           </nav>
         </div>
 
@@ -204,7 +223,7 @@ export default function AdminDashboard() {
         <div style={{ background: '#fff', borderRadius: '20px', padding: '24px', boxShadow: 'var(--shadow-sm)', border: '1px solid var(--border)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
             <h2 style={{ fontSize: '20px', fontWeight: '900', color: 'var(--dark)' }}>
-              {activeTab === 'bookings' ? 'إدارة الحجوزات' : activeTab === 'quick' ? 'إضافة حجز جديد' : 'إدارة الملاعب'}
+              {activeTab === 'bookings' ? 'إدارة الحجوزات' : activeTab === 'quick' ? 'إضافة حجز جديد' : activeTab === 'finances' ? 'الماليات والمصروفات' : 'إدارة الملاعب'}
             </h2>
             {activeTab === 'bookings' && (
               <button 
@@ -237,6 +256,8 @@ export default function AdminDashboard() {
 
           {activeTab === 'quick' ? (
             <AdminQuickBooking showToast={showToast} />
+          ) : activeTab === 'finances' ? (
+            <AdminFinancesTab showToast={showToast} />
           ) : activeTab === 'bookings' ? (
             <div style={{ overflowX: 'auto' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'right' }}>
