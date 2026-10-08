@@ -167,7 +167,7 @@ export default function AdminFinancesTab({ showToast }) {
             المصروفات (إيجار، كهرباء، صيانة...)
           </h3>
           
-          <form onSubmit={handleAddExpense} style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
+          <form onSubmit={handleAddExpense} style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginBottom: '20px' }}>
             <input 
               type="text" 
               placeholder="وصف المصروف" 
@@ -175,7 +175,7 @@ export default function AdminFinancesTab({ showToast }) {
               required
               value={expenseForm.description}
               onChange={e => setExpenseForm({...expenseForm, description: e.target.value})}
-              style={{ flex: 2 }}
+              style={{ flex: '1 1 200px' }}
             />
             <input 
               type="number" 
@@ -184,7 +184,7 @@ export default function AdminFinancesTab({ showToast }) {
               required
               value={expenseForm.amount}
               onChange={e => setExpenseForm({...expenseForm, amount: e.target.value})}
-              style={{ flex: 1 }}
+              style={{ flex: '1 1 120px' }}
             />
             <input 
               type="date" 
@@ -192,9 +192,9 @@ export default function AdminFinancesTab({ showToast }) {
               required
               value={expenseForm.date}
               onChange={e => setExpenseForm({...expenseForm, date: e.target.value})}
-              style={{ flex: 1 }}
+              style={{ flex: '1 1 120px' }}
             />
-            <button type="submit" style={{ background: '#10b981', color: '#fff', border: 'none', padding: '0 16px', borderRadius: '8px', cursor: 'pointer' }}>
+            <button type="submit" style={{ background: '#10b981', color: '#fff', border: 'none', padding: '12px 16px', borderRadius: '8px', cursor: 'pointer', flex: '0 0 auto' }}>
               <Plus size={20} />
             </button>
           </form>
@@ -226,7 +226,7 @@ export default function AdminFinancesTab({ showToast }) {
             رواتب الموظفين (شهرياً)
           </h3>
           
-          <form onSubmit={handleAddEmployee} style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
+          <form onSubmit={handleAddEmployee} style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginBottom: '20px' }}>
             <input 
               type="text" 
               placeholder="اسم الموظف" 
@@ -234,7 +234,7 @@ export default function AdminFinancesTab({ showToast }) {
               required
               value={employeeForm.name}
               onChange={e => setEmployeeForm({...employeeForm, name: e.target.value})}
-              style={{ flex: 2 }}
+              style={{ flex: '1 1 200px' }}
             />
             <input 
               type="number" 
@@ -243,9 +243,9 @@ export default function AdminFinancesTab({ showToast }) {
               required
               value={employeeForm.salary}
               onChange={e => setEmployeeForm({...employeeForm, salary: e.target.value})}
-              style={{ flex: 1 }}
+              style={{ flex: '1 1 120px' }}
             />
-            <button type="submit" style={{ background: '#3b82f6', color: '#fff', border: 'none', padding: '0 16px', borderRadius: '8px', cursor: 'pointer' }}>
+            <button type="submit" style={{ background: '#3b82f6', color: '#fff', border: 'none', padding: '12px 16px', borderRadius: '8px', cursor: 'pointer', flex: '0 0 auto' }}>
               <Plus size={20} />
             </button>
           </form>

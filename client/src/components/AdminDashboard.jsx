@@ -67,19 +67,21 @@ export default function AdminDashboard() {
       <header style={{
         background: 'var(--dark)',
         color: '#fff',
-        padding: '16px 30px',
+        padding: '16px 20px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
+        flexWrap: 'wrap',
+        gap: '16px',
         boxShadow: 'var(--shadow-md)'
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '20px', flexWrap: 'wrap' }}>
           <div style={{ fontSize: '22px', fontWeight: 900, display: 'flex', alignItems: 'center', gap: '6px' }}>
             <span>لوحة تحكم ملاعبك</span>
             <span style={{ color: 'var(--accent-lime)' }}>⚽</span>
           </div>
           
-          <nav style={{ display: 'flex', gap: '16px', marginLeft: '20px' }}>
+          <nav style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
             <button 
               onClick={() => setActiveTab('quick')}
               style={{
@@ -220,8 +222,8 @@ export default function AdminDashboard() {
         </div>
 
         {/* Content Area */}
-        <div style={{ background: '#fff', borderRadius: '20px', padding: '24px', boxShadow: 'var(--shadow-sm)', border: '1px solid var(--border)' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+        <div style={{ background: '#fff', borderRadius: '20px', padding: '20px', boxShadow: 'var(--shadow-sm)', border: '1px solid var(--border)', overflowX: 'auto' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', marginBottom: '24px' }}>
             <h2 style={{ fontSize: '20px', fontWeight: '900', color: 'var(--dark)' }}>
               {activeTab === 'bookings' ? 'إدارة الحجوزات' : activeTab === 'quick' ? 'إضافة حجز جديد' : activeTab === 'finances' ? 'الماليات والمصروفات' : 'إدارة الملاعب'}
             </h2>
@@ -242,12 +244,12 @@ export default function AdminDashboard() {
               </button>
             )}
             {activeTab !== 'quick' && (
-              <div style={{ position: 'relative' }}>
+              <div style={{ position: 'relative', width: 'min(100%, 250px)' }}>
                 <input 
                   type="text" 
                   placeholder="بحث سريع..." 
                   className="form-input"
-                  style={{ paddingRight: '40px', width: '250px' }}
+                  style={{ paddingRight: '40px', width: '100%' }}
                 />
                 <Search size={18} color="var(--text-muted)" style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)' }} />
               </div>
