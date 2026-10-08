@@ -92,7 +92,7 @@ export default function BookingModal({ bookingData, onClose, onBookingSuccess })
 
           <hr style={{ border: 0, borderTop: '1px solid #dce8df', margin: '12px 0' }} />
 
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center' }}>
             <span style={{ fontWeight: '700', fontSize: '14px' }}>المبلغ الإجمالي المطلـوب:</span>
             <span style={{ fontSize: '24px', fontWeight: '900', color: 'var(--primary)' }}>
               {totalPrice} ج.م

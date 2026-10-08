@@ -77,51 +77,53 @@ export default function Navbar({
 
         {/* User Actions */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <button
-            className="btn btn-light"
-            onClick={onOpenMyBookings}
-            style={{ padding: '10px 18px', fontSize: '14px' }}
-          >
-            <Calendar size={17} />
-            <span>حجوزاتي</span>
-          </button>
-
-          {user ? (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <div style={{
-                background: '#eaf7f0',
-                padding: '8px 14px',
-                borderRadius: '12px',
-                fontWeight: 700,
-                color: 'var(--primary)',
-                fontSize: '14px',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px'
-              }}>
-                <User size={16} />
-                <span>{user.phone}</span>
-              </div>
-              <button
-                className="btn btn-outline"
-                onClick={onLogout}
-                title="تسجيل الخروج"
-                style={{ padding: '8px 12px', fontSize: '13px', color: '#dc2626', borderColor: '#fca5a5' }}
-              >
-                <LogOut size={16} />
-                <span>خروج</span>
-              </button>
-            </div>
-          ) : (
+          <div className="desktop-actions" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <button
-              className="btn btn-primary"
-              onClick={onOpenLogin}
-              style={{ padding: '10px 20px', fontSize: '14px' }}
+              className="btn btn-light"
+              onClick={onOpenMyBookings}
+              style={{ padding: '10px 18px', fontSize: '14px' }}
             >
-              <User size={17} />
-              <span>تسجيل الدخول</span>
+              <Calendar size={17} />
+              <span>حجوزاتي</span>
             </button>
-          )}
+
+            {user ? (
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <div style={{
+                  background: '#eaf7f0',
+                  padding: '8px 14px',
+                  borderRadius: '12px',
+                  fontWeight: 700,
+                  color: 'var(--primary)',
+                  fontSize: '14px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px'
+                }}>
+                  <User size={16} />
+                  <span>{user.phone}</span>
+                </div>
+                <button
+                  className="btn btn-outline"
+                  onClick={onLogout}
+                  title="تسجيل الخروج"
+                  style={{ padding: '8px 12px', fontSize: '13px', color: '#dc2626', borderColor: '#fca5a5' }}
+                >
+                  <LogOut size={16} />
+                  <span>خروج</span>
+                </button>
+              </div>
+            ) : (
+              <button
+                className="btn btn-primary"
+                onClick={onOpenLogin}
+                style={{ padding: '10px 20px', fontSize: '14px' }}
+              >
+                <User size={17} />
+                <span>تسجيل الدخول</span>
+              </button>
+            )}
+          </div>
 
           {/* Mobile Menu Toggle */}
           <button
@@ -154,12 +156,22 @@ export default function Navbar({
           <a href="#hero" onClick={() => setMobileMenuOpen(false)} style={{ textDecoration: 'none', color: 'var(--text-dark)' }}>الرئيسية</a>
           <a href="#pitches" onClick={() => { onScrollToPitches(); setMobileMenuOpen(false); }} style={{ textDecoration: 'none', color: 'var(--text-dark)' }}>الملاعب المتاحة</a>
           <a href="#how" onClick={() => { onScrollToHow(); setMobileMenuOpen(false); }} style={{ textDecoration: 'none', color: 'var(--text-dark)' }}>كيف تحجز؟</a>
+          
+          <div style={{ height: '1px', background: 'var(--border)', margin: '4px 0' }}></div>
+          
+          <button onClick={() => { onOpenMyBookings(); setMobileMenuOpen(false); }} style={{ background: 'none', border: 'none', color: 'var(--text-dark)', textAlign: 'right', fontWeight: 700, fontSize: '16px' }}>
+            حجوزاتي
+          </button>
           <button onClick={() => { onOpenRegisterPitch(); setMobileMenuOpen(false); }} style={{ background: 'none', border: 'none', color: 'var(--primary)', textAlign: 'right', fontWeight: 700, fontSize: '16px' }}>
             + ضيف ملعبك على المنصة
           </button>
-          {user && (
+          {user ? (
             <button onClick={() => { onLogout(); setMobileMenuOpen(false); }} style={{ background: 'none', border: 'none', color: '#dc2626', textAlign: 'right', fontWeight: 700, fontSize: '16px' }}>
               تسجيل الخروج (Logout)
+            </button>
+          ) : (
+            <button onClick={() => { onOpenLogin(); setMobileMenuOpen(false); }} style={{ background: 'none', border: 'none', color: 'var(--primary)', textAlign: 'right', fontWeight: 700, fontSize: '16px' }}>
+              تسجيل الدخول
             </button>
           )}
         </div>

@@ -255,7 +255,7 @@ body {
     gap: 30px !important;
   }
 
-  .desktop-nav {
+  .desktop-nav, .desktop-actions {
     display: none !important;
   }
 

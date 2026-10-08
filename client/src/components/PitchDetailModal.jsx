@@ -136,6 +136,8 @@ export default function PitchDetailModal({ pitch, onClose, onProceedToBooking })
               display: 'flex',
               justify: 'space-between',
               alignItems: 'center',
+              flexWrap: 'wrap',
+              gap: '12px',
               marginBottom: '14px'
             }}>
               <h4 style={{ fontSize: '16px', fontWeight: '800', display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -205,6 +207,7 @@ export default function PitchDetailModal({ pitch, onClose, onProceedToBooking })
             borderRadius: '16px',
             padding: '18px 24px',
             display: 'flex',
+            flexWrap: 'wrap',
             alignItems: 'center',
             justifyContent: 'space-between',
             gap: '16px',
