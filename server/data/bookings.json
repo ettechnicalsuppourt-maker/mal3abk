@@ -1,0 +1,21 @@
+[
+  {
+    "id": "MLB-891234",
+    "pitchId": "pitch-1",
+    "pitchName": "Prime Football Arena",
+    "pitchArea": "مدينة نصر",
+    "customerName": "أحمد محمود",
+    "customerPhone": "01011223344",
+    "date": "2026-10-08",
+    "timeSlots": [
+      "20:00",
+      "21:00"
+    ],
+    "hours": 2,
+    "pricePerHour": 250,
+    "totalAmount": 500,
+    "paymentMethod": "cash",
+    "status": "confirmed",
+    "createdAt": "2026-10-08T15:03:54.143Z"
+  }
+]

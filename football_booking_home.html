@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>احجز ملعبك | Home</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap');
+*{box-sizing:border-box} body{margin:0;font-family:Cairo,Arial,sans-serif;background:#f5f7f5;color:#14251b}
+:root{--green:#11834b;--dark:#0b2b1b;--lime:#c8ef65;--muted:#6c786f;--white:#fff}
+.container{width:min(1180px,92%);margin:auto}
+header{background:#fff;border-bottom:1px solid #e7ece8;position:sticky;top:0;z-index:10}
+.nav{height:74px;display:flex;align-items:center;justify-content:space-between;gap:25px}
+.logo{font-size:25px;font-weight:900;color:var(--dark)} .logo span{color:var(--green)}
+nav{display:flex;gap:25px;align-items:center}nav a{text-decoration:none;color:#526057;font-weight:600}
+.btn{border:0;border-radius:12px;padding:12px 22px;font-family:inherit;font-weight:800;cursor:pointer}
+.btn-primary{background:var(--green);color:white}.btn-light{background:#eef7f1;color:var(--green)}
+.hero{background:linear-gradient(135deg,#082719 0%,#0d5835 62%,#11834b 100%);color:white;padding:65px 0 88px;position:relative;overflow:hidden}
+.hero:after{content:"⚽";position:absolute;left:5%;bottom:-30px;font-size:180px;opacity:.08;transform:rotate(-20deg)}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:45px;align-items:center}
+.badge{display:inline-block;background:rgba(200,239,101,.15);color:var(--lime);padding:7px 14px;border-radius:50px;font-size:14px;font-weight:700}
+h1{font-size:48px;line-height:1.25;margin:18px 0 12px} .hero p{font-size:18px;color:#d8e7df;line-height:1.9;margin-bottom:30px}
+.search-card{background:white;color:#14251b;border-radius:22px;padding:22px;box-shadow:0 22px 55px #00170b55}
+.search-title{font-weight:900;font-size:19px;margin-bottom:18px}
+.fields{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.field{background:#f5f7f5;border:1px solid #e2e8e3;border-radius:12px;padding:11px 13px}
+.field label{display:block;color:#748078;font-size:12px;margin-bottom:4px}.field select,.field input{border:0;background:transparent;width:100%;font-family:inherit;font-size:14px;font-weight:700;outline:0}
+.search-card .btn{width:100%;margin-top:13px;padding:14px}
+.section{padding:60px 0}.section-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:25px}
+.section h2{font-size:30px;margin:0}.section-sub{color:var(--muted);margin:6px 0 0}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{background:white;border-radius:18px;overflow:hidden;border:1px solid #e5ebe7;box-shadow:0 8px 25px #0c2b1510}
+.pitch{height:180px;background:linear-gradient(145deg,#1c934f,#0b6336);display:flex;align-items:center;justify-content:center;font-size:70px;position:relative}
+.price{position:absolute;top:13px;right:13px;background:white;padding:6px 11px;border-radius:9px;font-size:12px;font-weight:800;color:var(--green)}
+.card-body{padding:17px}.card-body h3{margin:0 0 7px;font-size:19px}.location{font-size:13px;color:var(--muted);margin-bottom:13px}.meta{display:flex;justify-content:space-between;align-items:center}.stars{color:#f0ad19;font-weight:800}.book{padding:9px 14px;font-size:12px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.step{background:white;border-radius:18px;padding:25px;border:1px solid #e5ebe7}.num{width:42px;height:42px;border-radius:12px;background:#e9f7ed;color:var(--green);display:grid;place-items:center;font-weight:900;margin-bottom:15px}
+.cta{background:var(--dark);color:white;border-radius:25px;padding:40px;display:flex;justify-content:space-between;align-items:center;gap:25px}.cta h2{margin:0 0 8px}.cta p{color:#b9cbbf;margin:0}
+footer{background:#071b10;color:#9caf9f;padding:28px 0;margin-top:60px}.footer-inner{display:flex;justify-content:space-between}
+.modal{display:none;position:fixed;inset:0;background:#00140aaa;z-index:30;align-items:center;justify-content:center;padding:20px}.modal.active{display:flex}.modal-box{background:white;border-radius:22px;width:min(520px,100%);padding:25px}.modal-head{display:flex;justify-content:space-between;align-items:center}.close{background:#eef2ef;border:0;border-radius:9px;width:35px;height:35px;cursor:pointer}.booking-summary{background:#f4f8f5;padding:16px;border-radius:14px;margin:18px 0}.total{font-size:28px;color:var(--green);font-weight:900}
+@media(max-width:800px){nav{display:none}.hero-grid{grid-template-columns:1fr}.hero{padding-top:40px}h1{font-size:36px}.cards,.steps{grid-template-columns:1fr}.fields{grid-template-columns:1fr}.cta{display:block}.cta .btn{margin-top:20px}.footer-inner{display:block;text-align:center}}
+</style>
+</head>
+<body>
+<header><div class="container nav">
+  <div class="logo">مَلعب<span>ك</span> ⚽</div>
+  <nav><a href="#">الرئيسية</a><a href="#fields">الملاعب</a><a href="#how">كيف تحجز؟</a><a href="#">تواصل معنا</a></nav>
+  <button class="btn btn-primary">تسجيل الدخول</button>
+</div></header>
+
+<section class="hero"><div class="container hero-grid">
+  <div>
+    <span class="badge">أسرع طريقة لحجز ملعبك في مصر</span>
+    <h1>احجز ملعبك ولعبتك<br>تبدأ من هنا ⚽</h1>
+    <p>ابحث عن أقرب ملعب، اختار الوقت وعدد الساعات، واعرف السعر النهائي قبل ما تأكد الحجز.</p>
+    <button class="btn btn-light" onclick="document.getElementById('fields').scrollIntoView({behavior:'smooth'})">استكشف الملاعب</button>
+  </div>
+  <div class="search-card">
+    <div class="search-title">احجز ملعبك الآن</div>
+    <div class="fields">
+      <div class="field"><label>المحافظة / المنطقة</label><select id="area"><option>مدينة نصر</option><option>التجمع الخامس</option><option>المعادي</option><option>الهرم</option><option>6 أكتوبر</option></select></div>
+      <div class="field"><label>نوع الملعب</label><select id="type"><option>ملعب خماسي</option><option>ملعب سباعي</option><option>ملعب قانوني</option></select></div>
+      <div class="field"><label>التاريخ</label><input id="date" type="date"></div>
+      <div class="field"><label>عدد الساعات</label><select id="hours" onchange="updatePrice()"><option value="1">ساعة واحدة</option><option value="2">ساعتين</option><option value="3">3 ساعات</option><option value="4">4 ساعات</option></select></div>
+    </div>
+    <button class="btn btn-primary" onclick="openBooking()">ابحث عن الملاعب المتاحة</button>
+  </div>
+</div></section>
+
+<section class="section" id="fields"><div class="container">
+  <div class="section-head"><div><h2>ملاعب مميزة</h2><p class="section-sub">أفضل الملاعب القريبة منك والمُقيّمة من اللاعبين</p></div><button class="btn btn-light">عرض الكل</button></div>
+  <div class="cards">
+    <div class="card"><div class="pitch"><span class="price">من 250 ج / ساعة</span>⚽</div><div class="card-body"><h3>Prime Football Arena</h3><div class="location">📍 مدينة نصر — القاهرة</div><div class="meta"><span class="stars">★ 4.9</span><button class="btn btn-primary book" onclick="selectPitch('Prime Football Arena',250)">احجز الآن</button></div></div></div>
+    <div class="card"><div class="pitch"><span class="price">من 300 ج / ساعة</span>⚽</div><div class="card-body"><h3>Champions Field</h3><div class="location">📍 التجمع الخامس — القاهرة</div><div class="meta"><span class="stars">★ 4.8</span><button class="btn btn-primary book" onclick="selectPitch('Champions Field',300)">احجز الآن</button></div></div></div>
+    <div class="card"><div class="pitch"><span class="price">من 220 ج / ساعة</span>⚽</div><div class="card-body"><h3>Goal Arena</h3><div class="location">📍 6 أكتوبر — الجيزة</div><div class="meta"><span class="stars">★ 4.7</span><button class="btn btn-primary book" onclick="selectPitch('Goal Arena',220)">احجز الآن</button></div></div></div>
+  </div>
+</div></section>
+
+<section class="section" id="how"><div class="container">
+  <div class="section-head"><div><h2>احجز في 3 خطوات</h2><p class="section-sub">كل اللي محتاجه أقل من دقيقة</p></div></div>
+  <div class="steps"><div class="step"><div class="num">1</div><h3>اختار الملعب</h3><p>حدد منطقتك وشوف الملاعب المتاحة والأسعار والتقييمات.</p></div><div class="step"><div class="num">2</div><h3>حدد الوقت</h3><p>اختار التاريخ والميعاد وعدد الساعات اللي محتاجها.</p></div><div class="step"><div class="num">3</div><h3>أكد الحجز</h3><p>راجع السعر النهائي وأكد الحجز بسهولة وأمان.</p></div></div>
+</div></section>
+
+<section class="section"><div class="container"><div class="cta"><div><h2>عندك ملعب؟ ضيفه على منصتنا</h2><p>وصل ملعبك بآلاف اللاعبين وزوّد الحجوزات.</p></div><button class="btn btn-light">سجّل ملعبك</button></div></div></section>
+
+<footer><div class="container footer-inner"><div>مَلعبك ⚽ — احجز والعب</div><div>© 2026 جميع الحقوق محفوظة</div></div></footer>
+
+<div class="modal" id="modal"><div class="modal-box"><div class="modal-head"><h2>تأكيد الحجز</h2><button class="close" onclick="closeModal()">×</button></div><div class="booking-summary">
+  <div id="pitchName" style="font-weight:900;font-size:19px"></div><div id="details" style="color:#6c786f;margin-top:7px"></div>
+  <hr style="border:0;border-top:1px solid #e5ebe7;margin:15px 0"><div>الإجمالي</div><div class="total" id="total">250 ج</div>
+</div><button class="btn btn-primary" style="width:100%" onclick="alert('تم تأكيد الحجز تجريبيًا 🎉')">تأكيد الحجز</button></div></div>
+
+<script>
+let selectedPrice=250, selectedPitch='Prime Football Arena';
+const date=document.getElementById('date'); date.value=new Date().toISOString().split('T')[0];
+function updatePrice(){ if(selectedPrice) document.getElementById('total').textContent=(selectedPrice*+document.getElementById('hours').value).toLocaleString('ar-EG')+' ج'; }
+function selectPitch(name,price){selectedPitch=name;selectedPrice=price;openBooking();}
+function openBooking(){document.getElementById('pitchName').textContent=selectedPitch;document.getElementById('details').textContent=document.getElementById('area').value+' • '+date.value+' • '+document.getElementById('hours').value+' ساعة';updatePrice();document.getElementById('modal').classList.add('active')}
+function closeModal(){document.getElementById('modal').classList.remove('active')}
+</script>
+</body></html>
