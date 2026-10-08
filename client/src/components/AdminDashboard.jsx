@@ -1,9 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { mockBookings, mockPitches } from '../utils/mockData';
-import { Users, CalendarCheck, MapPin, LogOut, Search, Activity } from 'lucide-react';
+import { Users, CalendarCheck, MapPin, LogOut, Search, Activity, Plus, Trash2, Edit } from 'lucide-react';
+import AdminQuickBooking from './AdminQuickBooking';
+import Toast from './Toast';
 
 export default function AdminDashboard() {
-  const [activeTab, setActiveTab] = useState('bookings');
+  const [activeTab, setActiveTab] = useState('quick');
+  const [toast, setToast] = useState(null);
+  const [refresh, setRefresh] = useState(0);
+
+  const showToast = (message, type = 'success') => {
+    setToast({ message, type });
+    setRefresh(prev => prev + 1);
+  };
   
   useEffect(() => {
     const isAdmin = localStorage.getItem('malaeb_admin');
@@ -38,6 +47,24 @@ export default function AdminDashboard() {
           </div>
           
           <nav style={{ display: 'flex', gap: '16px', marginLeft: '20px' }}>
+            <button 
+              onClick={() => setActiveTab('quick')}
+              style={{
+                background: activeTab === 'quick' ? 'rgba(255,255,255,0.1)' : 'transparent',
+                color: activeTab === 'quick' ? 'var(--accent-lime)' : '#c2dcd0',
+                border: 'none',
+                padding: '8px 16px',
+                borderRadius: '8px',
+                fontWeight: 700,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px'
+              }}
+            >
+              <Plus size={18} />
+              حجز سريع
+            </button>
             <button 
               onClick={() => setActiveTab('bookings')}
               style={{
@@ -145,20 +172,24 @@ export default function AdminDashboard() {
         <div style={{ background: '#fff', borderRadius: '20px', padding: '24px', boxShadow: 'var(--shadow-sm)', border: '1px solid var(--border)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
             <h2 style={{ fontSize: '20px', fontWeight: '900', color: 'var(--dark)' }}>
-              {activeTab === 'bookings' ? 'أحدث الحجوزات' : 'إدارة الملاعب'}
+              {activeTab === 'bookings' ? 'إدارة الحجوزات' : activeTab === 'quick' ? 'إضافة حجز جديد' : 'إدارة الملاعب'}
             </h2>
-            <div style={{ position: 'relative' }}>
-              <input 
-                type="text" 
-                placeholder="بحث سريع..." 
-                className="form-input"
-                style={{ paddingRight: '40px', width: '250px' }}
-              />
-              <Search size={18} color="var(--text-muted)" style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)' }} />
-            </div>
+            {activeTab !== 'quick' && (
+              <div style={{ position: 'relative' }}>
+                <input 
+                  type="text" 
+                  placeholder="بحث سريع..." 
+                  className="form-input"
+                  style={{ paddingRight: '40px', width: '250px' }}
+                />
+                <Search size={18} color="var(--text-muted)" style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)' }} />
+              </div>
+            )}
           </div>
 
-          {activeTab === 'bookings' ? (
+          {activeTab === 'quick' ? (
+            <AdminQuickBooking showToast={showToast} />
+          ) : activeTab === 'bookings' ? (
             <div style={{ overflowX: 'auto' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'right' }}>
                 <thead>
@@ -168,7 +199,7 @@ export default function AdminDashboard() {
                     <th style={{ padding: '14px', color: 'var(--text-muted)', fontWeight: '700', fontSize: '14px' }}>الملعب</th>
                     <th style={{ padding: '14px', color: 'var(--text-muted)', fontWeight: '700', fontSize: '14px' }}>التاريخ والساعات</th>
                     <th style={{ padding: '14px', color: 'var(--text-muted)', fontWeight: '700', fontSize: '14px' }}>الإجمالي</th>
-                    <th style={{ padding: '14px', color: 'var(--text-muted)', fontWeight: '700', fontSize: '14px' }}>طريقة الدفع</th>
+                    <th style={{ padding: '14px', color: 'var(--text-muted)', fontWeight: '700', fontSize: '14px' }}>إجراءات</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -190,18 +221,26 @@ export default function AdminDashboard() {
                           <div style={{ fontWeight: '700' }}>{b.date}</div>
                           <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>{b.timeSlots.join(' , ')}</div>
                         </td>
-                        <td style={{ padding: '14px', fontWeight: '800' }}>{b.totalPrice} ج.م</td>
                         <td style={{ padding: '14px' }}>
-                          <span style={{ 
-                            background: 'var(--primary-light)', 
-                            color: 'var(--primary)', 
-                            padding: '4px 10px', 
-                            borderRadius: '50px', 
-                            fontSize: '12px', 
-                            fontWeight: '700' 
-                          }}>
+                          <span style={{ background: 'var(--primary-light)', color: 'var(--primary)', padding: '4px 8px', borderRadius: '4px', fontSize: '12px', fontWeight: '700', display: 'block', width: 'fit-content', marginBottom: '8px' }}>
                             {b.paymentMethod === 'cash' ? 'كاش' : b.paymentMethod === 'vodafone' ? 'فودافون كاش' : 'فيزا'}
                           </span>
+                          <div style={{ display: 'flex', gap: '8px' }}>
+                            <button 
+                              onClick={() => showToast('هذه الميزة قيد التطوير', 'info')}
+                              style={{ background: '#f0f5f2', border: 'none', padding: '6px', borderRadius: '6px', cursor: 'pointer', color: 'var(--primary)' }}
+                            ><Edit size={16} /></button>
+                            <button 
+                              onClick={() => {
+                                const index = mockBookings.findIndex(bk => bk.id === b.id);
+                                if (index > -1) {
+                                  mockBookings.splice(index, 1);
+                                  showToast('تم حذف الحجز بنجاح', 'success');
+                                }
+                              }}
+                              style={{ background: '#fde8e8', border: 'none', padding: '6px', borderRadius: '6px', cursor: 'pointer', color: '#dc2626' }}
+                            ><Trash2 size={16} /></button>
+                          </div>
                         </td>
                       </tr>
                     );
@@ -218,7 +257,7 @@ export default function AdminDashboard() {
                     <th style={{ padding: '14px', color: 'var(--text-muted)', fontWeight: '700', fontSize: '14px' }}>المنطقة</th>
                     <th style={{ padding: '14px', color: 'var(--text-muted)', fontWeight: '700', fontSize: '14px' }}>النوع</th>
                     <th style={{ padding: '14px', color: 'var(--text-muted)', fontWeight: '700', fontSize: '14px' }}>السعر/ساعة</th>
-                    <th style={{ padding: '14px', color: 'var(--text-muted)', fontWeight: '700', fontSize: '14px' }}>التقييم</th>
+                    <th style={{ padding: '14px', color: 'var(--text-muted)', fontWeight: '700', fontSize: '14px' }}>إجراءات</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -232,7 +271,24 @@ export default function AdminDashboard() {
                         </span>
                       </td>
                       <td style={{ padding: '14px', fontWeight: '800', color: 'var(--primary)' }}>{p.pricePerHour} ج.م</td>
-                      <td style={{ padding: '14px', fontWeight: '700', color: 'var(--accent-amber)' }}>⭐ {p.rating}</td>
+                      <td style={{ padding: '14px' }}>
+                        <div style={{ display: 'flex', gap: '8px' }}>
+                          <button 
+                            onClick={() => showToast('هذه الميزة قيد التطوير', 'info')}
+                            style={{ background: '#f0f5f2', border: 'none', padding: '6px', borderRadius: '6px', cursor: 'pointer', color: 'var(--primary)' }}
+                          ><Edit size={16} /></button>
+                          <button 
+                            onClick={() => {
+                              const index = mockPitches.findIndex(pt => pt.id === p.id);
+                              if (index > -1) {
+                                mockPitches.splice(index, 1);
+                                showToast('تم حذف الملعب بنجاح', 'success');
+                              }
+                            }}
+                            style={{ background: '#fde8e8', border: 'none', padding: '6px', borderRadius: '6px', cursor: 'pointer', color: '#dc2626' }}
+                          ><Trash2 size={16} /></button>
+                        </div>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -241,6 +297,7 @@ export default function AdminDashboard() {
           )}
         </div>
       </main>
+      <Toast toast={toast} onClose={() => setToast(null)} />
     </div>
   );
 }
