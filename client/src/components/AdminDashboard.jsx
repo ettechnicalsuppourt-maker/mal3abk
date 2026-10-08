@@ -1,17 +1,49 @@
 import React, { useState, useEffect } from 'react';
 import { mockBookings, mockPitches } from '../utils/mockData';
-import { Users, CalendarCheck, MapPin, LogOut, Search, Activity, Plus, Trash2, Edit } from 'lucide-react';
+import { Users, CalendarCheck, MapPin, LogOut, Search, Activity, Plus, Trash2, Edit, Download } from 'lucide-react';
 import AdminQuickBooking from './AdminQuickBooking';
+import AdminAddPitchModal from './AdminAddPitchModal';
 import Toast from './Toast';
 
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState('quick');
   const [toast, setToast] = useState(null);
   const [refresh, setRefresh] = useState(0);
+  const [showAddPitchModal, setShowAddPitchModal] = useState(false);
 
   const showToast = (message, type = 'success') => {
     setToast({ message, type });
     setRefresh(prev => prev + 1);
+  };
+
+  const handleExportExcel = () => {
+    // Generate CSV string
+    const headers = ['كود الحجز', 'اسم العميل', 'رقم الهاتف', 'اسم الملعب', 'التاريخ', 'المواعيد', 'طريقة الدفع', 'الإجمالي'];
+    const rows = mockBookings.map(b => {
+      const pitchName = mockPitches.find(p => p.id === b.pitchId)?.nameAr || 'غير معروف';
+      return [
+        b.id,
+        b.customerName,
+        b.customerPhone,
+        pitchName,
+        b.date,
+        b.timeSlots.join(' و '),
+        b.paymentMethod === 'cash' ? 'كاش' : b.paymentMethod === 'vodafone' ? 'فودافون كاش' : 'فيزا',
+        b.totalPrice
+      ];
+    });
+
+    const csvContent = "data:text/csv;charset=utf-8,\uFEFF" + 
+      headers.join(',') + '\n' + 
+      rows.map(e => e.join(',')).join('\n');
+
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement('a');
+    link.setAttribute('href', encodedUri);
+    link.setAttribute('download', `bookings_${new Date().toISOString().split('T')[0]}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
   
   useEffect(() => {
@@ -174,6 +206,22 @@ export default function AdminDashboard() {
             <h2 style={{ fontSize: '20px', fontWeight: '900', color: 'var(--dark)' }}>
               {activeTab === 'bookings' ? 'إدارة الحجوزات' : activeTab === 'quick' ? 'إضافة حجز جديد' : 'إدارة الملاعب'}
             </h2>
+            {activeTab === 'bookings' && (
+              <button 
+                onClick={handleExportExcel}
+                style={{ background: '#10b981', color: '#fff', border: 'none', padding: '8px 16px', borderRadius: '8px', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}
+              >
+                <Download size={18} /> تصدير Excel
+              </button>
+            )}
+            {activeTab === 'pitches' && (
+              <button 
+                onClick={() => setShowAddPitchModal(true)}
+                style={{ background: '#10b981', color: '#fff', border: 'none', padding: '8px 16px', borderRadius: '8px', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}
+              >
+                <Plus size={18} /> إضافة ملعب
+              </button>
+            )}
             {activeTab !== 'quick' && (
               <div style={{ position: 'relative' }}>
                 <input 
@@ -297,6 +345,17 @@ export default function AdminDashboard() {
           )}
         </div>
       </main>
+      
+      {showAddPitchModal && (
+        <AdminAddPitchModal 
+          onClose={() => setShowAddPitchModal(false)}
+          onSuccess={(newPitch) => {
+            setShowAddPitchModal(false);
+            showToast('تم إضافة الملعب بنجاح');
+          }}
+        />
+      )}
+      
       <Toast toast={toast} onClose={() => setToast(null)} />
     </div>
   );
